@@ -40,6 +40,7 @@ typedef struct {
     uint32_t frequency;
     uint8_t rssi;
     uint32_t history_frequency[3];
+    float rssi_min_thresh;
     bool signal;
     SubGhzFrequencyAnalyzerLogItemArray_t log_frequency;
     SubGhzFrequencyAnalyzerFragmentBottomType fragment_bottom_type;
@@ -180,6 +181,13 @@ void subghz_frequency_analyzer_draw(Canvas* canvas, SubGhzFrequencyAnalyzerModel
         canvas_draw_str(canvas, 0, 8, "Frequency Analyzer");
         canvas_draw_icon(canvas, 108, 0, &I_Internal_antenna_20x12);
         canvas_draw_str(canvas, 0, 64, "RSSI");
+        canvas_draw_str(canvas, 8, 40, "Threshold:");
+        snprintf(buffer, sizeof(buffer), "%.1fdB", (double)model->rssi_min_thresh);
+
+        canvas_draw_triangle(canvas, 3, 38, 6, 6, CanvasDirectionBottomToTop);
+        canvas_draw_triangle(canvas, 3, 42, 6, 6, CanvasDirectionTopToBottom);
+
+        canvas_draw_str(canvas, 8, 49, buffer);
         subghz_frequency_analyzer_draw_rssi(canvas, model->rssi, 20, 64);
 
         subghz_frequency_analyzer_history_frequency_draw(canvas, model);
@@ -248,6 +256,29 @@ bool subghz_frequency_analyzer_input(InputEvent* event, void* context) {
                 }
             },
             true);
+    } else if(
+        (event->type == InputTypeShort) &&
+        ((event->key == InputKeyUp) || (event->key == InputKeyDown))) {
+        //update min threshold display and value
+        with_view_model(
+            instance->view,
+            SubGhzFrequencyAnalyzerModel * model,
+            {
+                if(model->fragment_bottom_type == SubGhzFrequencyAnalyzerFragmentBottomTypeMain) {
+                    //main page showing
+                    if(event->key == InputKeyUp) {
+                        ++model->rssi_min_thresh;
+                    }
+                    //increment model min rssi
+
+                    else if(event->key == InputKeyDown) {
+                        --model->rssi_min_thresh;
+                        //decrement model min rssi
+                    }
+                }
+            },
+            true);
+        //
     } else if((event->type == InputTypeShort) || (event->type == InputTypeRepeat)) {
         with_view_model(
             instance->view,
@@ -337,7 +368,8 @@ void subghz_frequency_analyzer_pair_callback(
     void* context,
     uint32_t frequency,
     float rssi,
-    bool signal) {
+    bool signal,
+    float* rssi_thresh) {
     SubGhzFrequencyAnalyzer* instance = context;
     if(float_is_equal(rssi, 0.f) && instance->locked) {
         if(instance->callback) {
@@ -373,6 +405,7 @@ void subghz_frequency_analyzer_pair_callback(
                     model, frequency != instance->last_frequency);
                 instance->last_frequency = frequency;
             }
+            *rssi_thresh = model->rssi_min_thresh;
         },
         true);
 }
@@ -396,6 +429,7 @@ void subghz_frequency_analyzer_enter(void* context) {
         SubGhzFrequencyAnalyzerModel * model,
         {
             model->rssi = 0u;
+            model->rssi_min_thresh = -93.0f;
             model->frequency = 0;
             model->fragment_bottom_type = SubGhzFrequencyAnalyzerFragmentBottomTypeMain;
             model->log_frequency_order_by = SubGhzFrequencyAnalyzerLogOrderBySeqDesc;
@@ -426,6 +460,7 @@ void subghz_frequency_analyzer_exit(void* context) {
             model->fragment_bottom_type = SubGhzFrequencyAnalyzerFragmentBottomTypeMain;
             model->log_frequency_order_by = SubGhzFrequencyAnalyzerLogOrderBySeqDesc;
             model->log_frequency_scroll_offset = 0;
+            model->rssi_min_thresh = 0;
             model->history_frequency[0] = model->history_frequency[1] =
                 model->history_frequency[2] = 0;
             SubGhzFrequencyAnalyzerLogItemArray_clear(model->log_frequency);
