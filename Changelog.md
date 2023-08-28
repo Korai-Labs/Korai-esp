@@ -1,21 +1,22 @@
-moved settings files to sd
 
-added custom radio presets
+moved settings files to sd  
 
-removed subghz restrictions
+added custom radio presets  
 
-added keeloq saving
+removed subghz restrictions  
 
-added jamming files
+added keeloq saving  
 
-added tesla files
+added jamming files  
 
-added custom radio preset
+added tesla files  
 
-removed some animations
+added custom radio preset  
 
-added aditional aid(for emv), by @haisenteck
+removed some animations  
 
-added aditional nfc keys
+added aditional aid(for emv), by @haisenteck  
 
-added x10 and oregon2, thanks to @haisenteck
+added aditional nfc keys  
+
+added x10 and oregon2, thanks to @haisenteck  
