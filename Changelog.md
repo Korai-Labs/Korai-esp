@@ -10,3 +10,4 @@
 - Added additional nfc keys
 - Added x10 and oregon2, thanks to @haisenteck
 - Added rssi threshold changer on subghz interface
+dd frequency selection and use for LPD and PMR446 channel in the app Subghz
