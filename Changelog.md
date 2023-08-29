@@ -9,3 +9,4 @@
 - Added additional aid (for emv), by @haisenteck
 - Added additional nfc keys
 - Added x10 and oregon2, thanks to @haisenteck
+- Added rssi threshold changer on subghz interface
