@@ -282,7 +282,8 @@ bool subghz_save_protocol_to_file(
 
         // Create subghz folder directory if necessary
         if(!storage_simply_mkdir(storage, furi_string_get_cstr(file_dir))) {
-            dialog_message_show_storage_error(subghz->dialogs, "No se ha podido\ncrear la carpeta");
+            dialog_message_show_storage_error(
+                subghz->dialogs, "No se ha podido\ncrear la carpeta");
             break;
         }
 

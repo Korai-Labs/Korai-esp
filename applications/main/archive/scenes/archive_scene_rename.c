@@ -26,7 +26,7 @@ void archive_scene_rename_on_enter(void* context) {
 
     path_extract_extension(current->path, archive->file_extension, MAX_EXT_LEN);
 
-    text_input_set_header_text(text_input, "Rename:");
+    text_input_set_header_text(text_input, "Renombre:");
 
     text_input_set_result_callback(
         text_input,

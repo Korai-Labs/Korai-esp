@@ -304,14 +304,14 @@ void subghz_read_raw_draw(Canvas* canvas, SubGhzReadRAWModel* model) {
 
     switch(model->status) {
     case SubGhzReadRAWStatusIDLE:
-        elements_button_left(canvas, "Erase");
-        elements_button_center(canvas, "Send");
-        elements_button_right(canvas, "Save");
+        elements_button_left(canvas, "Borrar");
+        elements_button_center(canvas, "Enviar");
+        elements_button_right(canvas, "Guardar");
         break;
     case SubGhzReadRAWStatusLoadKeyIDLE:
-        elements_button_left(canvas, "New");
-        elements_button_center(canvas, "Send");
-        elements_button_right(canvas, "More");
+        elements_button_left(canvas, "Nuevo");
+        elements_button_center(canvas, "Enviar");
+        elements_button_right(canvas, "Mas");
         elements_text_box(
             canvas,
             4,
@@ -329,16 +329,16 @@ void subghz_read_raw_draw(Canvas* canvas, SubGhzReadRAWModel* model) {
     case SubGhzReadRAWStatusLoadKeyTX:
     case SubGhzReadRAWStatusLoadKeyTXRepeat:
         graphics_mode = 0;
-        elements_button_center(canvas, "Send");
+        elements_button_center(canvas, "Enviar");
         break;
 
     case SubGhzReadRAWStatusStart:
-        elements_button_left(canvas, "Config");
+        elements_button_left(canvas, "Ajustes");
         elements_button_center(canvas, "REC");
         break;
 
     default:
-        elements_button_center(canvas, "Stop");
+        elements_button_center(canvas, "Parar");
         break;
     }
 
@@ -559,7 +559,7 @@ void subghz_read_raw_set_status(
         break;
 
     default:
-        FURI_LOG_W(TAG, "unknown status");
+        FURI_LOG_W(TAG, "estado desconocido");
         break;
     }
 }

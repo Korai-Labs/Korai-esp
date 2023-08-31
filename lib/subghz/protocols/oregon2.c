@@ -213,7 +213,8 @@ SubGhzProtocolStatus subghz_protocol_decoder_oregon2_serialize(
     return true;
 }
 
-SubGhzProtocolStatus subghz_protocol_decoder_oregon2_deserialize(void* context, FlipperFormat* flipper_format) {
+SubGhzProtocolStatus
+    subghz_protocol_decoder_oregon2_deserialize(void* context, FlipperFormat* flipper_format) {
     furi_assert(context);
     SubGhzProtocolDecoderOregon2* instance = context;
     bool ret = false;

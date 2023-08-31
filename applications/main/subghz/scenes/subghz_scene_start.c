@@ -30,7 +30,11 @@ void subghz_scene_start_on_enter(void* context) {
         subghz_scene_start_submenu_callback,
         subghz);
     submenu_add_item(
-        subghz->submenu, "Guardado", SubmenuIndexSaved, subghz_scene_start_submenu_callback, subghz);
+        subghz->submenu,
+        "Guardado",
+        SubmenuIndexSaved,
+        subghz_scene_start_submenu_callback,
+        subghz);
     submenu_add_item(
         subghz->submenu,
         "Añadir manualmente",

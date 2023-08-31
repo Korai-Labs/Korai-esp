@@ -206,7 +206,8 @@ static int32_t subghz_frequency_analyzer_worker_thread(void* context) {
             }
             // Deliver callback
             if(instance->pair_callback) {
-                instance->pair_callback(                    instance->context,
+                instance->pair_callback(
+                    instance->context,
                     frequency_rssi.frequency_fine,
                     rssi_temp,
                     true,
@@ -231,7 +232,8 @@ static int32_t subghz_frequency_analyzer_worker_thread(void* context) {
             }
             // Deliver callback
             if(instance->pair_callback) {
-                instance->pair_callback(                    instance->context,
+                instance->pair_callback(
+                    instance->context,
                     frequency_rssi.frequency_coarse,
                     rssi_temp,
                     true,
@@ -242,7 +244,8 @@ static int32_t subghz_frequency_analyzer_worker_thread(void* context) {
                 instance->sample_hold_counter--;
                 if(instance->sample_hold_counter == 15) {
                     if(instance->pair_callback) {
-                        instance->pair_callback(                            instance->context,
+                        instance->pair_callback(
+                            instance->context,
                             frequency_temp,
                             rssi_temp,
                             false,
@@ -252,7 +255,8 @@ static int32_t subghz_frequency_analyzer_worker_thread(void* context) {
             } else {
                 instance->filVal = 0;
                 rssi_temp = -127.0f;
-                instance->pair_callback(                    instance->context, 0, 0, false, &instance->rssi_min_thresh);
+                instance->pair_callback(
+                    instance->context, 0, 0, false, &instance->rssi_min_thresh);
             }
         }
     }

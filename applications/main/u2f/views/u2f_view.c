@@ -28,7 +28,8 @@ static void u2f_view_draw_callback(Canvas* canvas, void* _model) {
     } else if(model->display_msg == U2fMsgRegister) {
         elements_button_center(canvas, "OK");
         canvas_draw_icon(canvas, 22, 15, &I_Auth_62x31);
-        canvas_draw_str_aligned(canvas, 128 / 2, 3, AlignCenter, AlignTop, "Pulsa OK para registrar");
+        canvas_draw_str_aligned(
+            canvas, 128 / 2, 3, AlignCenter, AlignTop, "Pulsa OK para registrar");
     } else if(model->display_msg == U2fMsgAuth) {
         elements_button_center(canvas, "OK");
         canvas_draw_icon(canvas, 22, 15, &I_Auth_62x31);

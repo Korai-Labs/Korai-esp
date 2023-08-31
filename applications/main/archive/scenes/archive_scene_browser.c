@@ -23,13 +23,13 @@ static const char* archive_get_flipper_app_name(ArchiveFileTypeEnum file_type) {
     case ArchiveFileTypeLFRFID:
         return "125 kHz RFID";
     case ArchiveFileTypeInfrared:
-        return "Infrared";
+        return "Infrarojo";
     case ArchiveFileTypeBadUsb:
         return "Bad USB";
     case ArchiveFileTypeU2f:
         return "U2F";
     case ArchiveFileTypeUpdateManifest:
-        return "UpdaterApp";
+        return "Actualizador";
     default:
         return NULL;
     }

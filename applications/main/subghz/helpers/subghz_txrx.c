@@ -272,7 +272,9 @@ SubGhzTxRxStartTxState subghz_txrx_tx_start(SubGhzTxRx* instance, FlipperFormat*
 
                 } else {
                     FURI_LOG_E(
-                        TAG, "Nombre de preset desconocido \" %s \"", furi_string_get_cstr(preset->name));
+                        TAG,
+                        "Nombre de preset desconocido \" %s \"",
+                        furi_string_get_cstr(preset->name));
                     ret = SubGhzTxRxStartTxStateErrorParserOthers;
                 }
 

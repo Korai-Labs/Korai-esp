@@ -45,8 +45,7 @@ bool subghz_scene_rpc_on_event(void* context, SceneManagerEvent event) {
                 case SubGhzTxRxStartTxStateErrorOnlyRx:
                     rpc_system_app_set_error_code(subghz->rpc_ctx, SubGhzErrorTypeOnlyRX);
                     rpc_system_app_set_error_text(
-                        subghz->rpc_ctx,
-                        "Transmision restringida en tu region");
+                        subghz->rpc_ctx, "Transmision restringida en tu region");
                     break;
                 case SubGhzTxRxStartTxStateErrorParserOthers:
                     rpc_system_app_set_error_code(subghz->rpc_ctx, SubGhzErrorTypeParserOthers);
