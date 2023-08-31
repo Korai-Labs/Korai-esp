@@ -106,7 +106,7 @@ bool u2f_init(U2fData* U2F) {
     furi_assert(U2F);
 
     if(u2f_data_cert_check() == false) {
-        FURI_LOG_E(TAG, "");
+        FURI_LOG_E(TAG, "error de carga");
         return false;
     }
     if(u2f_data_cert_key_load(U2F->cert_key) == false) {
