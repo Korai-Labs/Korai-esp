@@ -144,12 +144,12 @@ void gpio_scene_usb_uart_cfg_on_enter(void* context) {
             item, baudrate_mode[app->usb_uart_cfg->baudrate_mode]);
     }
 
-    item = variable_item_list_add(var_item_list, "UART Pins", 2, line_port_cb, app);
+    item = variable_item_list_add(var_item_list, "Pines UART", 2, line_port_cb, app);
     variable_item_set_current_value_index(item, app->usb_uart_cfg->uart_ch);
     variable_item_set_current_value_text(item, uart_ch[app->usb_uart_cfg->uart_ch]);
 
     item = variable_item_list_add(
-        var_item_list, "RTS/DTR Pins", COUNT_OF(flow_pins), line_flow_cb, app);
+        var_item_list, "Pines RTS/DTR", COUNT_OF(flow_pins), line_flow_cb, app);
     variable_item_set_current_value_index(item, app->usb_uart_cfg->flow_pins);
     variable_item_set_current_value_text(item, flow_pins[app->usb_uart_cfg->flow_pins]);
     app->var_item_flow = item;

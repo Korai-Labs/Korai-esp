@@ -43,7 +43,7 @@ bool subghz_tx_start(SubGhz* subghz, FlipperFormat* flipper_format) {
     switch(subghz_txrx_tx_start(subghz->txrx, flipper_format)) {
     case SubGhzTxRxStartTxStateErrorParserOthers:
         dialog_message_show_storage_error(
-            subghz->dialogs, "Error in protocol\nparameters\ndescription");
+            subghz->dialogs, "Error en descripcion\nde los parametros\del protocolo");
         break;
     case SubGhzTxRxStartTxStateErrorOnlyRx:
         subghz_dialog_message_show_only_rx(subghz);
@@ -60,11 +60,11 @@ void subghz_dialog_message_show_only_rx(SubGhz* subghz) {
     DialogsApp* dialogs = subghz->dialogs;
     DialogMessage* message = dialog_message_alloc();
 
-    const char* header_text = "Transmission is blocked";
-    const char* message_text = "Transmission on\nthis frequency is\nrestricted in\nyour region";
+    const char* header_text = "Transmision bloqueada";
+    const char* message_text = "Transmitir en \nesta frecuencia\nesta restringido\nen tu region";
     if(!furi_hal_region_is_provisioned()) {
-        header_text = "Firmware update needed";
-        message_text = "Please update\nfirmware before\nusing this feature\nflipp.dev/upd";
+        header_text = "Actualizacion requerida";
+        message_text = "Actualiza el\nfirmware antes\nde usar esto\nflipp.dev/upd";
     }
 
     dialog_message_set_header(message, header_text, 63, 3, AlignCenter, AlignTop);
@@ -92,12 +92,12 @@ bool subghz_key_load(SubGhz* subghz, const char* file_path, bool show_dialog) {
     do {
         stream_clean(fff_data_stream);
         if(!flipper_format_file_open_existing(fff_data_file, file_path)) {
-            FURI_LOG_E(TAG, "Error open file %s", file_path);
+            FURI_LOG_E(TAG, "Error abriendo %s", file_path);
             break;
         }
 
         if(!flipper_format_read_header(fff_data_file, temp_str, &temp_data32)) {
-            FURI_LOG_E(TAG, "Missing or incorrect header");
+            FURI_LOG_E(TAG, "Cabecero invalido");
             break;
         }
 
@@ -105,24 +105,24 @@ bool subghz_key_load(SubGhz* subghz, const char* file_path, bool show_dialog) {
             (!strcmp(furi_string_get_cstr(temp_str), SUBGHZ_RAW_FILE_TYPE))) &&
            temp_data32 == SUBGHZ_KEY_FILE_VERSION) {
         } else {
-            FURI_LOG_E(TAG, "Type or version mismatch");
+            FURI_LOG_E(TAG, "Version o tipo invalido");
             break;
         }
 
         //Load frequency
-        if(!flipper_format_read_uint32(fff_data_file, "Frequency", &temp_data32, 1)) {
-            FURI_LOG_E(TAG, "Missing Frequency");
+        if(!flipper_format_read_uint32(fff_data_file, "Frecuencia", &temp_data32, 1)) {
+            FURI_LOG_E(TAG, "Frecuencia faltante");
             break;
         }
 
         if(!subghz_txrx_radio_device_is_frequecy_valid(subghz->txrx, temp_data32)) {
-            FURI_LOG_E(TAG, "Frequency not supported");
+            FURI_LOG_E(TAG, "Frecuencia no soportada");
             break;
         }
 
         //Load preset
         if(!flipper_format_read_string(fff_data_file, "Preset", temp_str)) {
-            FURI_LOG_E(TAG, "Missing Preset");
+            FURI_LOG_E(TAG, "Preset faltante");
             break;
         }
 
@@ -140,7 +140,7 @@ bool subghz_key_load(SubGhz* subghz, const char* file_path, bool show_dialog) {
             //load custom preset from file
             if(!subghz_setting_load_custom_preset(
                    setting, furi_string_get_cstr(temp_str), fff_data_file)) {
-                FURI_LOG_E(TAG, "Missing Custom preset");
+                FURI_LOG_E(TAG, "Preset faltante");
                 break;
             }
         }
@@ -154,8 +154,8 @@ bool subghz_key_load(SubGhz* subghz, const char* file_path, bool show_dialog) {
             subghz_setting_get_preset_data_size(setting, preset_index));
 
         //Load protocol
-        if(!flipper_format_read_string(fff_data_file, "Protocol", temp_str)) {
-            FURI_LOG_E(TAG, "Missing Protocol");
+        if(!flipper_format_read_string(fff_data_file, "Protocolo", temp_str)) {
+            FURI_LOG_E(TAG, "Protocolo faltante");
             break;
         }
 
@@ -181,7 +181,7 @@ bool subghz_key_load(SubGhz* subghz, const char* file_path, bool show_dialog) {
                 break;
             }
         } else {
-            FURI_LOG_E(TAG, "Protocol not found");
+            FURI_LOG_E(TAG, "Protocolo no encontrado");
             break;
         }
 
@@ -195,13 +195,13 @@ bool subghz_key_load(SubGhz* subghz, const char* file_path, bool show_dialog) {
     switch(load_key_state) {
     case SubGhzLoadKeyStateParseErr:
         if(show_dialog) {
-            dialog_message_show_storage_error(subghz->dialogs, "Cannot parse\nfile");
+            dialog_message_show_storage_error(subghz->dialogs, "No se ha podido\nprocesar");
         }
         return false;
     case SubGhzLoadKeyStateProtocolDescriptionErr:
         if(show_dialog) {
             dialog_message_show_storage_error(
-                subghz->dialogs, "Error in protocol\nparameters\ndescription");
+                subghz->dialogs, "Error en descripcion\ndeparametros\ndel protocolo");
         }
         return false;
 
@@ -209,7 +209,7 @@ bool subghz_key_load(SubGhz* subghz, const char* file_path, bool show_dialog) {
         return true;
 
     default:
-        furi_crash("SubGhz: Unknown load_key_state.");
+        furi_crash("SubGhz: load_key_state desconocido.");
         return false;
     }
 }
@@ -282,7 +282,7 @@ bool subghz_save_protocol_to_file(
 
         // Create subghz folder directory if necessary
         if(!storage_simply_mkdir(storage, furi_string_get_cstr(file_dir))) {
-            dialog_message_show_storage_error(subghz->dialogs, "Cannot create\nfolder");
+            dialog_message_show_storage_error(subghz->dialogs, "No se ha podido\ncrear la carpeta");
             break;
         }
 
@@ -349,7 +349,7 @@ bool subghz_rename_file(SubGhz* subghz) {
             furi_string_get_cstr(subghz->file_path));
 
         if(fs_result != FSE_OK) {
-            dialog_message_show_storage_error(subghz->dialogs, "Cannot rename\n file/directory");
+            dialog_message_show_storage_error(subghz->dialogs, "No se ha podido\nrenombrar");
             ret = false;
         }
     }
@@ -367,7 +367,7 @@ bool subghz_file_available(SubGhz* subghz) {
         storage_common_stat(storage, furi_string_get_cstr(subghz->file_path), NULL);
 
     if(fs_result != FSE_OK) {
-        dialog_message_show_storage_error(subghz->dialogs, "File not available\n file/directory");
+        dialog_message_show_storage_error(subghz->dialogs, "archivo no dispinible\n");
         ret = false;
     }
 

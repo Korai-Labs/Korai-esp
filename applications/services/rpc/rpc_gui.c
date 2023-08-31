@@ -255,8 +255,8 @@ static void rpc_system_gui_virtual_display_render_callback(Canvas* canvas, void*
 
     if(!rpc_gui->virtual_display_not_empty) {
         canvas_set_font(canvas, FontPrimary);
-        canvas_draw_str_aligned(canvas, 64, 20, AlignCenter, AlignCenter, "Virtual Display");
-        canvas_draw_str_aligned(canvas, 64, 36, AlignCenter, AlignCenter, "Waiting for frames...");
+        canvas_draw_str_aligned(canvas, 64, 20, AlignCenter, AlignCenter, "Monitor virtual");
+        canvas_draw_str_aligned(canvas, 64, 36, AlignCenter, AlignCenter, "Esperando frames...");
         return;
     }
 
@@ -340,7 +340,7 @@ static void rpc_system_gui_virtual_display_frame_process(const PB_Main* request,
     furi_assert(session);
 
     if(!rpc_gui->virtual_display_view_port) {
-        FURI_LOG_W(TAG, "Virtual display is not started, ignoring incoming frame packet");
+        FURI_LOG_W(TAG, "Pantalla virtual no iniciada, ignorando frame entrante");
         return;
     }
 

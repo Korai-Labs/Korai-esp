@@ -30,7 +30,7 @@ SubGhzProtocolStatus subghz_txrx_gen_data_protocol(
         subghz_receiver_search_decoder_base_by_name(instance->receiver, protocol_name);
 
     if(instance->decoder_result == NULL) {
-        FURI_LOG_E(TAG, "Protocol not found!");
+        FURI_LOG_E(TAG, "Protocolo no encontrado!");
         ret = SubGhzProtocolStatusErrorProtocolNotFound;
         return ret;
     }

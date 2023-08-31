@@ -14,7 +14,7 @@ FuriMutex* furi_mutex_alloc(FuriMutexType type) {
     } else if(type == FuriMutexTypeRecursive) {
         hMutex = xSemaphoreCreateRecursiveMutex();
     } else {
-        furi_crash("Programming error");
+        furi_crash("Error de programacion");
     }
 
     furi_check(hMutex != NULL);

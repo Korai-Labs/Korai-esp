@@ -81,13 +81,13 @@ bool u2f_data_cert_check() {
             if(len_cur != 4) break;
 
             if(file_buf[0] != 0x30) {
-                FURI_LOG_E(TAG, "Wrong certificate header");
+                FURI_LOG_E(TAG, "cabeza de certificado incorrecta");
                 break;
             }
 
             size_t temp_len = ((file_buf[2] << 8) | (file_buf[3])) + 4;
             if(temp_len != file_size) {
-                FURI_LOG_E(TAG, "Wrong certificate length");
+                FURI_LOG_E(TAG, "longitud de certificado incorrecta");
                 break;
             }
             state = true;

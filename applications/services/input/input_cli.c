@@ -5,9 +5,9 @@
 #include <toolbox/args.h>
 
 static void input_cli_usage() {
-    printf("Usage:\r\n");
+    printf("Uso:\r\n");
     printf("input <cmd> <args>\r\n");
-    printf("Cmd list:\r\n");
+    printf("comandos:\r\n");
     printf("\tdump\t\t\t - dump input events\r\n");
     printf("\tsend <key> <type>\t - send input event\r\n");
 }

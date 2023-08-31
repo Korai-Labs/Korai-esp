@@ -40,10 +40,10 @@ bool dolphin_state_save(DolphinState* dolphin_state) {
         DOLPHIN_STATE_HEADER_VERSION);
 
     if(result) {
-        FURI_LOG_I(TAG, "State saved");
+        FURI_LOG_I(TAG, "Estado guardado");
         dolphin_state->dirty = false;
     } else {
-        FURI_LOG_E(TAG, "Failed to save state");
+        FURI_LOG_E(TAG, "error al guardar");
     }
 
     return result;
@@ -65,7 +65,7 @@ bool dolphin_state_load(DolphinState* dolphin_state) {
     }
 
     if(!success) {
-        FURI_LOG_W(TAG, "Reset dolphin-state");
+        FURI_LOG_W(TAG, "Reiniciar estado");
         memset(dolphin_state, 0, sizeof(*dolphin_state));
         dolphin_state->dirty = true;
     }

@@ -207,11 +207,11 @@ static int32_t u2f_hid_worker(void* context) {
         if(flags & WorkerEvtStop) break;
         if(flags & WorkerEvtConnect) {
             u2f_set_state(u2f_hid->u2f_instance, 1);
-            FURI_LOG_D(WORKER_TAG, "Connect");
+            FURI_LOG_D(WORKER_TAG, "Conectado");
         }
         if(flags & WorkerEvtDisconnect) {
             u2f_set_state(u2f_hid->u2f_instance, 0);
-            FURI_LOG_D(WORKER_TAG, "Disconnect");
+            FURI_LOG_D(WORKER_TAG, "Desconectado");
         }
         if(flags & WorkerEvtRequest) {
             uint32_t len_cur = furi_hal_hid_u2f_get_request(packet_buf);

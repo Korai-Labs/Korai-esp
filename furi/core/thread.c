@@ -59,7 +59,7 @@ __attribute__((__noreturn__)) void furi_thread_catch() { //-V1082
     // If you're here it means you're probably doing something wrong
     // with critical sections or with scheduler state
     asm volatile("nop"); // extra magic
-    furi_crash("You are doing it wrong"); //-V779
+    furi_crash("lo estas haciendo mal"); //-V779
     __builtin_unreachable();
 }
 

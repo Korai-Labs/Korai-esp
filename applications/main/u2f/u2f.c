@@ -106,25 +106,25 @@ bool u2f_init(U2fData* U2F) {
     furi_assert(U2F);
 
     if(u2f_data_cert_check() == false) {
-        FURI_LOG_E(TAG, "Certificate load error");
+        FURI_LOG_E(TAG, "");
         return false;
     }
     if(u2f_data_cert_key_load(U2F->cert_key) == false) {
-        FURI_LOG_E(TAG, "Certificate key load error");
+        FURI_LOG_E(TAG, "error con la clave del certificado");
         return false;
     }
     if(u2f_data_key_load(U2F->device_key) == false) {
-        FURI_LOG_W(TAG, "Key loading error, generating new");
+        FURI_LOG_W(TAG, "error de clave, generando una nueva");
         if(u2f_data_key_generate(U2F->device_key) == false) {
-            FURI_LOG_E(TAG, "Key write failed");
+            FURI_LOG_E(TAG, "error escribiendo la clave");
             return false;
         }
     }
     if(u2f_data_cnt_read(&U2F->counter) == false) {
-        FURI_LOG_W(TAG, "Counter loading error, resetting counter");
+        FURI_LOG_W(TAG, "error de contador, reiniciando");
         U2F->counter = 0;
         if(u2f_data_cnt_write(0) == false) {
-            FURI_LOG_E(TAG, "Counter write failed");
+            FURI_LOG_E(TAG, "error escribiendo el contador");
             return false;
         }
     }
@@ -319,7 +319,7 @@ static uint16_t u2f_authenticate(U2fData* U2F, uint8_t* buf) {
     memcpy(resp->signature + signature_len, state_no_error, 2);
 
     U2F->counter++;
-    FURI_LOG_D(TAG, "Counter: %lu", U2F->counter);
+    FURI_LOG_D(TAG, "Contador: %lu", U2F->counter);
     u2f_data_cnt_write(U2F->counter);
 
     if(U2F->callback != NULL) U2F->callback(U2fNotifyAuthSuccess, U2F->context);

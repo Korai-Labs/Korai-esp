@@ -9,8 +9,8 @@ enum SubGhzRadioSettingIndex {
 
 #define RADIO_DEVICE_COUNT 2
 const char* const radio_device_text[RADIO_DEVICE_COUNT] = {
-    "Internal",
-    "External",
+    "Interno",
+    "Externo",
 };
 
 const uint32_t radio_device_value[RADIO_DEVICE_COUNT] = {

@@ -7,7 +7,7 @@ void subghz_scene_region_info_on_enter(void* context) {
     const FuriHalRegion* const region = furi_hal_region_get();
     FuriString* buffer = furi_string_alloc();
     if(region) {
-        furi_string_cat_printf(buffer, "Region: %s,  bands:\n", region->country_code);
+        furi_string_cat_printf(buffer, "Region: %s,  bandas:\n", region->country_code);
         for(uint16_t i = 0; i < region->bands_count; ++i) {
             furi_string_cat_printf(
                 buffer,

@@ -12,9 +12,9 @@ static void flipper_print_version(const char* target, const Version* version) {
         FURI_LOG_I(
             TAG,
             "\r\n\t%s version:\t%s\r\n"
-            "\tBuild date:\t\t%s\r\n"
-            "\tGit Commit:\t\t%s (%s)%s\r\n"
-            "\tGit Branch:\t\t%s",
+            "\tFecha compilacion:\t\t%s\r\n"
+            "\tCommit:\t\t%s (%s)%s\r\n"
+            "\tRama:\t\t%s",
             target,
             version_get_version(version),
             version_get_builddate(version),
@@ -23,17 +23,17 @@ static void flipper_print_version(const char* target, const Version* version) {
             version_get_dirty_flag(version) ? " (dirty)" : "",
             version_get_gitbranch(version));
     } else {
-        FURI_LOG_I(TAG, "No build info for %s", target);
+        FURI_LOG_I(TAG, "Sin informacion para %s", target);
     }
 }
 
 void flipper_init() {
     flipper_print_version("Firmware", furi_hal_version_get_firmware_version());
 
-    FURI_LOG_I(TAG, "Boot mode %d, starting services", furi_hal_rtc_get_boot_mode());
+    FURI_LOG_I(TAG, "Modo arranque %d, iniciando", furi_hal_rtc_get_boot_mode());
 
     for(size_t i = 0; i < FLIPPER_SERVICES_COUNT; i++) {
-        FURI_LOG_D(TAG, "Starting service %s", FLIPPER_SERVICES[i].name);
+        FURI_LOG_D(TAG, "Iniciando %s", FLIPPER_SERVICES[i].name);
 
         FuriThread* thread = furi_thread_alloc_ex(
             FLIPPER_SERVICES[i].name,
@@ -46,7 +46,7 @@ void flipper_init() {
         furi_thread_start(thread);
     }
 
-    FURI_LOG_I(TAG, "Startup complete");
+    FURI_LOG_I(TAG, "Inicio completado");
 }
 
 void vApplicationGetIdleTaskMemory(

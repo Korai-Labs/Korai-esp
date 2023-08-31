@@ -148,7 +148,7 @@ int32_t dolphin_srv(void* p) {
     UNUSED(p);
 
     if(furi_hal_rtc_get_boot_mode() != FuriHalRtcBootModeNormal) {
-        FURI_LOG_W(TAG, "Skipping start in special boot mode");
+        FURI_LOG_W(TAG, "Modo de arranque especial, omitiendo");
         return 0;
     }
 
@@ -178,14 +178,14 @@ int32_t dolphin_srv(void* p) {
                 event.stats->level_up_is_pending =
                     !dolphin_state_xp_to_levelup(dolphin->state->data.icounter);
             } else if(event.type == DolphinEventTypeFlush) {
-                FURI_LOG_I(TAG, "Flush stats");
+                FURI_LOG_I(TAG, "Limpiar estados");
                 dolphin_state_save(dolphin->state);
             } else if(event.type == DolphinEventTypeClearLimits) {
-                FURI_LOG_I(TAG, "Clear limits");
+                FURI_LOG_I(TAG, "Limpiar limites");
                 dolphin_state_clear_limits(dolphin->state);
                 dolphin_state_save(dolphin->state);
             } else if(event.type == DolphinEventTypeIncreaseButthurt) {
-                FURI_LOG_I(TAG, "Increase butthurt");
+                FURI_LOG_I(TAG, "Incrementar butthurt");
                 dolphin_state_butthurted(dolphin->state);
                 dolphin_state_save(dolphin->state);
             }
@@ -196,7 +196,7 @@ int32_t dolphin_srv(void* p) {
         }
     }
 
-    furi_crash("That was unexpected");
+    furi_crash("Eso fue inesperado");
 
     return 0;
 }

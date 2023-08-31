@@ -11,7 +11,7 @@ void subghz_scene_rpc_on_enter(void* context) {
     Popup* popup = subghz->popup;
 
     popup_set_header(popup, "Sub-GHz", 89, 42, AlignCenter, AlignBottom);
-    popup_set_text(popup, "RPC mode", 89, 44, AlignCenter, AlignTop);
+    popup_set_text(popup, "Modo RPC", 89, 44, AlignCenter, AlignTop);
 
     popup_set_icon(popup, 0, 12, &I_RFIDDolphinSend_97x61);
 
@@ -46,12 +46,12 @@ bool subghz_scene_rpc_on_event(void* context, SceneManagerEvent event) {
                     rpc_system_app_set_error_code(subghz->rpc_ctx, SubGhzErrorTypeOnlyRX);
                     rpc_system_app_set_error_text(
                         subghz->rpc_ctx,
-                        "Transmission on this frequency is restricted in your region");
+                        "Transmision restringida en tu region");
                     break;
                 case SubGhzTxRxStartTxStateErrorParserOthers:
                     rpc_system_app_set_error_code(subghz->rpc_ctx, SubGhzErrorTypeParserOthers);
                     rpc_system_app_set_error_text(
-                        subghz->rpc_ctx, "Error in protocol parameters description");
+                        subghz->rpc_ctx, "Error en la descripcion de parametros del protocolo");
                     break;
 
                 default: //if(SubGhzTxRxStartTxStateOk)

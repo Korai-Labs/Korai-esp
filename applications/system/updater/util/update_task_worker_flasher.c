@@ -134,13 +134,13 @@ static bool update_task_write_stack_data(UpdateTask* update_task) {
 static void update_task_wait_for_restart(UpdateTask* update_task) {
     update_task_set_progress(update_task, UpdateTaskStageRadioBusy, 70);
     furi_delay_ms(C2_MODE_SWITCH_TIMEOUT);
-    furi_crash("C2 timeout");
+    furi_crash("timeout c2");
 }
 
 static bool update_task_write_stack(UpdateTask* update_task) {
     UpdateManifest* manifest = update_task->manifest;
     do {
-        FURI_LOG_W(TAG, "Writing stack");
+        FURI_LOG_W(TAG, "escribiendo stack");
         update_task_set_progress(update_task, UpdateTaskStageRadioImageValidate, 0);
         CHECK_RESULT(update_task_open_file(update_task, manifest->radio_image));
         CHECK_RESULT(

@@ -10,7 +10,7 @@ static size_t rpc_debug_print_file_msg(
     for(size_t i = 0; i < msg_files_size; ++i, ++msg_file) {
         furi_string_cat_printf(
             str,
-            "%s[%c] size: %5lu",
+            "%s[%c] tamaño: %5lu",
             prefix,
             msg_file->type == PB_Storage_File_FileType_DIR ? 'd' : 'f',
             msg_file->size);
@@ -73,17 +73,17 @@ void rpc_debug_print_message(const PB_Main* message) {
     switch(message->which_content) {
     default:
         /* not implemented yet */
-        furi_string_cat_printf(str, "\tNOT_IMPLEMENTED (%d) {\r\n", message->which_content);
+        furi_string_cat_printf(str, "\tNO_IMPLEMENTADO (%d) {\r\n", message->which_content);
         break;
     case PB_Main_stop_session_tag:
-        furi_string_cat_printf(str, "\tstop_session {\r\n");
+        furi_string_cat_printf(str, "\tparar_sesion {\r\n");
         break;
     case PB_Main_app_start_request_tag: {
-        furi_string_cat_printf(str, "\tapp_start {\r\n");
+        furi_string_cat_printf(str, "\tiniciar_app {\r\n");
         const char* name = message->content.app_start_request.name;
         const char* args = message->content.app_start_request.args;
         if(name) {
-            furi_string_cat_printf(str, "\t\tname: %s\r\n", name);
+            furi_string_cat_printf(str, "\t\tnombre: %s\r\n", name);
         }
         if(args) {
             furi_string_cat_printf(str, "\t\targs: %s\r\n", args);

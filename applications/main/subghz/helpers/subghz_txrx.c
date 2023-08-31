@@ -128,7 +128,7 @@ const char* subghz_txrx_get_preset_name(SubGhzTxRx* instance, const char* preset
     } else if(!strcmp(preset, "FuriHalSubGhzPresetCustom")) {
         preset_name = "CUSTOM";
     } else {
-        FURI_LOG_E(TAG, "Unknown preset");
+        FURI_LOG_E(TAG, "Preset Desconocido");
     }
     return preset_name;
 }
@@ -239,12 +239,12 @@ SubGhzTxRxStartTxState subghz_txrx_tx_start(SubGhzTxRx* instance, FlipperFormat*
             FURI_LOG_E(TAG, "Rewind error");
             break;
         }
-        if(!flipper_format_read_string(flipper_format, "Protocol", temp_str)) {
-            FURI_LOG_E(TAG, "Missing Protocol");
+        if(!flipper_format_read_string(flipper_format, "Protocolo", temp_str)) {
+            FURI_LOG_E(TAG, "Protocolo faltante");
             break;
         }
-        if(!flipper_format_insert_or_update_uint32(flipper_format, "Repeat", &repeat, 1)) {
-            FURI_LOG_E(TAG, "Unable Repeat");
+        if(!flipper_format_insert_or_update_uint32(flipper_format, "Repetir", &repeat, 1)) {
+            FURI_LOG_E(TAG, "No se puede repetir");
             break;
         }
         ret = SubGhzTxRxStartTxStateOk;
@@ -263,7 +263,7 @@ SubGhzTxRxStartTxState subghz_txrx_tx_start(SubGhzTxRx* instance, FlipperFormat*
                             instance->setting, furi_string_get_cstr(preset->name)));
                     if(preset->frequency) {
                         if(!subghz_txrx_tx(instance, preset->frequency)) {
-                            FURI_LOG_E(TAG, "Only Rx");
+                            FURI_LOG_E(TAG, "Solo Rx");
                             ret = SubGhzTxRxStartTxStateErrorOnlyRx;
                         }
                     } else {
@@ -272,7 +272,7 @@ SubGhzTxRxStartTxState subghz_txrx_tx_start(SubGhzTxRx* instance, FlipperFormat*
 
                 } else {
                     FURI_LOG_E(
-                        TAG, "Unknown name preset \" %s \"", furi_string_get_cstr(preset->name));
+                        TAG, "Nombre de preset desconocido \" %s \"", furi_string_get_cstr(preset->name));
                     ret = SubGhzTxRxStartTxStateErrorParserOthers;
                 }
 
