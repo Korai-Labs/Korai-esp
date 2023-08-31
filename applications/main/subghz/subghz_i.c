@@ -43,7 +43,7 @@ bool subghz_tx_start(SubGhz* subghz, FlipperFormat* flipper_format) {
     switch(subghz_txrx_tx_start(subghz->txrx, flipper_format)) {
     case SubGhzTxRxStartTxStateErrorParserOthers:
         dialog_message_show_storage_error(
-            subghz->dialogs, "Error en descripcion\nde los parametros\del protocolo");
+            subghz->dialogs, "Error en descripcion\nde los parametros\ndel protocolo");
         break;
     case SubGhzTxRxStartTxStateErrorOnlyRx:
         subghz_dialog_message_show_only_rx(subghz);
